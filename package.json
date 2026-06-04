@@ -1,0 +1,19 @@
+{
+  "name": "ubicasure",
+  "version": "1.0.0",
+  "description": "Emergency service station finder for El Salvador",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd back && npm install && cd ../front && npm install",
+    "dev": "concurrently \"npm run dev:back\" \"npm run dev:front\"",
+    "dev:back": "cd back && nodemon index.js",
+    "dev:front": "cd front && ng serve",
+    "build": "cd front && ng build",
+    "build:back": "echo \"Backend has no build step (plain Node.js)\"",
+    "start": "cd back && node index.js",
+    "start:front": "cd front && ng serve"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

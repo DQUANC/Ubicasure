@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="">UBICASURE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li *ngIf="!token" class="nav-item">
+          <a class="nav-link" routerLink="/login">Ingresar</a>
+        </li>
+        <li *ngIf="!token" class="nav-item">
+          <a class="nav-link" routerLink="/register">Registrarse</a>
+        </li>
+        <li *ngIf="token" class="nav-item">
+          <a class="nav-link" routerLink="/mapa">Mapa</a>
+        </li>
+        <li *ngIf="token" class="nav-item dropdown">
+          <a  class="nav-link dropdown-toggle active" id="navbarDropdownMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Policía
+          </a>
+        <ul *ngIf="token" class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+          <li><a class="dropdown-item" routerLink="/estacionesPolicia/policiaNacional"><i class="fa-solid fas fa-sign-out-alt"></i> Policía nacional</a></li>
+          <li><a class="dropdown-item" routerLink="/estacionesPolicia/policiaMunicipal"><i class="fa-solid fas fa-sign-out-alt"></i> Policía municipal</a></li>
+          <li><a class="dropdown-item" routerLink="/estacionesPolicia/policiasGeneral"><i class="fa-solid fas fa-sign-out-alt"></i> Policía general</a></li>
+        </ul>
+          </li>
+          <li *ngIf="token" class="nav-item dropdown">
+            <a  class="nav-link dropdown-toggle active" id="navbarDropdownMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Bomberos
+            </a>
+          <ul  class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+            <li><a class="dropdown-item" routerLink="/estacionesBomberos/bomberosVoluntarios"><i class="fa-solid fas fa-sign-out-alt"></i> Bomberos voluntarios</a></li>
+            <li><a class="dropdown-item" routerLink="/estacionesBomberos/bomberosMunicipales"><i class="fa-solid fas fa-sign-out-alt"></i> Bomberos municipales</a></li>
+            <li><a class="dropdown-item" routerLink="/estacionesBomberos/bomberosGeneral"><i class="fa-solid fas fa-sign-out-alt"></i> Bomberos general</a></li>
+          </ul>
+            </li>
+        <li *ngIf="token"class="nav-item dropdown">
+          <a  class="nav-link dropdown-toggle active" id="navbarDropdownMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Más acciones
+          </a>
+        <ul  class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+          <li><a class="dropdown-item" (click)="logOut()" routerLink=""><i class="fa-solid fas fa-sign-out-alt"></i> Log out</a></li>
+        </ul>
+          </li>
+      </ul>
+      
+      <span class="navbar-text">
+        |- Las ubicaciones mas importantes en tu mano -|
+      </span>
+    </div>
+  </div>
+</nav>

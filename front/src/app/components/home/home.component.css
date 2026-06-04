@@ -1,0 +1,12 @@
+.bn62 {
+    color: #fff;
+    background-color: #05C7F2;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    width: 8em;
+    font-size: large;
+    font-weight: 600;
+  }

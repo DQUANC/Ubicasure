@@ -1,0 +1,82 @@
+<div id="map">
+</div>
+
+<div *ngIf="role == 'ADMIN'" id="agregar">
+  <button id="Abutton" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="5" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar estación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="createStation(createStationForm)" #createStationForm="ngForm">
+          <div class="mb-2">
+            <label for="name" class="form-label">Nombre</label>
+            <input [(ngModel)]="stationModel.name" name="name" id="name" type="text" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label for="type" class="form-label">Tipo</label>
+            <input [(ngModel)]="stationModel.type" name="type" id="type" type="text" class="form-control" disabled>
+          </div>
+          <div class="mb-2">
+            <label for="phone" class="form-label">Teléfono</label>
+            <input [(ngModel)]="stationModel.phone" name="phone" id="phone" type="text" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label for="address" class="form-label">Dirección</label>
+            <input [(ngModel)]="stationModel.address" name="address" id="address" type="text" class="form-control"
+              required>
+          </div>
+          <div class="mb-2">
+            <label for="rating" class="form-label">Clasificación</label>
+            <input [(ngModel)]="stationModel.rating" name="rating" id="rating" type="number" class="form-control"
+              required>
+          </div>
+          <div class="mb-2">
+            <label for="businessHours" class="form-label">Horario</label>
+            <input [(ngModel)]="stationModel.businessHours" name="businessHours" id="businessHours" type="text" class="form-control"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button (click)="address(map)" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Agregar
+              ubicación</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel" style="background-color: #F5F6F7;">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasLabel">Actualizar Estación</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form (ngSubmit)="updateStation()" *ngIf="stationUpdated">
+      <div class="form-group mb-3">
+        <label  class="form-label ">Nombre</label>
+        <input [(ngModel)]="stationUpdated.name" name="name" id="inputEmail" type="text"  required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+      </div> 
+      <div class="form-group mb-3">
+        <label  class="form-label">Teléfono</label>
+        <input [(ngModel)]="stationUpdated.phone" name="phone" id="inputPassword" type="text"  required="" class="form-control rounded-pill border-0 shadow-sm px-4 ">
+      </div>
+      <div class="form-group mb-3">
+        <label  class="form-label">Clasificación</label>
+        <input [(ngModel)]="stationUpdated.rating" name="rating" id="rating" type="text"  required="" class="form-control rounded-pill border-0 shadow-sm px-4 ">
+      </div>
+      <div class="form-group mb-3">
+        <label  class="form-label">Horario</label>
+        <input [(ngModel)]="stationUpdated.businessHours" name="businessHours" id="businessHours" type="text"  required="" class="form-control rounded-pill border-0 shadow-sm px-4 ">
+      </div>
+      <div class="text-center">
+      <button type="submit" class="btn btn-info me-5" data-bs-dismiss="offcanvas">Update</button>
+      <a type="button" class="btn btn-secondary ms-2" data-bs-dismiss="offcanvas">Close</a>
+    </div>
+  </form> 
+  </div>
+</div>

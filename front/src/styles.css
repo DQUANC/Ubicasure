@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+#map {
+    height: 94.3vh;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+#agregar{
+    z-index: 5;
+}
+
+#Abutton{
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 17px;
+    margin-top: 10px;
+    margin-left: -9.6px;
+    padding: 0 15px;
+    height: 40px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    color: black;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+#center{
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 17px;
+    padding: 0 15px;
+    height: 40px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    color: black;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+#agregar button:hover, #center:hover{
+    background-color: #ebebeb;
+}
