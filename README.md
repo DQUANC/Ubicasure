@@ -1,48 +1,54 @@
 # Ubicasure
 
-## PENDING CICD DEPLOYMENT
-
 A location-based emergency service station finder for Guatemala. Users can view police and fire stations on an interactive Google Map, see station details (address, phone, hours, rating), and administrators can manage station data.
 
 ## Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | Angular 14, Google Maps API, Firebase Hosting |
-| Backend | Node.js, Express 4, MongoDB (Mongoose) |
-| Auth | JWT (jwt-simple) + bcrypt |
-| Database | MongoDB Atlas |
+| Frontend | Angular 19, Google Maps API, Firebase Hosting |
+| Backend | Node.js 22+, Express 4, MongoDB (Mongoose) |
+| Auth | JWT (jsonwebtoken) + bcryptjs |
+| Database | MongoDB (Atlas or local via Docker) |
+| Package manager | pnpm (workspace monorepo) |
 
 ## Project Structure
 
 ```
 ubicasure/
-├── back/           # Express REST API (port 3200)
-│   ├── configs/    # App setup and MongoDB connection
+├── back/                  # Express REST API (port 3200)
+│   ├── configs/           # App setup (CORS, helmet, rate-limit, routes) and MongoDB connection
 │   ├── src/
 │   │   ├── controllers/
 │   │   ├── models/
 │   │   ├── routes/
-│   │   ├── services/   # JWT and auth middleware
+│   │   ├── services/      # JWT auth + ensureAuth middleware
 │   │   └── utils/
+│   ├── .env               # Local secrets (gitignored)
+│   ├── .env.example       # Template for secrets
+│   ├── Dockerfile
 │   └── index.js
-├── front/          # Angular 14 SPA (port 4200)
+├── front/                 # Angular 19 SPA (port 4200)
 │   └── src/app/
-│       ├── components/ # 14 route components
+│       ├── components/    # 14 route components
 │       ├── guards/
 │       ├── models/
-│       └── services/
-├── .env.example    # Environment variable template
-└── package.json    # Root scripts (runs both with concurrently)
+│       └── services/      # HttpClient services + AuthStorageService
+├── scripts/               # Dev tooling (auto-commit, auto-pr, auto-jira, dashboard)
+├── .github/workflows/     # GitHub Actions CI/CD
+├── .husky/                # Git hooks
+├── docker-compose.yml     # Local dev (backend + MongoDB)
+├── pnpm-workspace.yaml    # pnpm monorepo config
+└── package.json           # Root scripts
 ```
 
 ## Prerequisites
 
-- Node.js 18+
-- npm 9+
-- Angular CLI: `npm install -g @angular/cli@14`
-- A MongoDB Atlas cluster
-- A Google Maps API key with Maps JavaScript API and Places API enabled
+- Node.js 22+
+- pnpm 9+: `npm install -g pnpm`
+- Angular CLI 19: `pnpm add -g @angular/cli@19`
+- MongoDB (Railway service, MongoDB Atlas, or local via Docker)
+- Google Maps API key with Maps JavaScript API enabled
 
 ## Setup
 
@@ -51,28 +57,45 @@ ubicasure/
 ```bash
 git clone <repo-url>
 cd ubicasure
-npm run install:all
+pnpm install
 ```
 
 **2. Configure environment variables**
 
-Copy `.env.example` to `.env` in `back/` and fill in your values:
-
 ```bash
-cp .env.example back/.env
+cp back/.env.example back/.env
 ```
 
-Update `back/configs/mongoConfigs.js` to read `process.env.MONGO_URI` and `back/src/services/jwt.js` to read `process.env.JWT_SECRET`.
+Fill in `back/.env` with your values:
 
-Update `front/src/environments/environment.ts` with your Firebase and Google Maps keys.
+```
+MONGO_URI=mongodb://localhost:27017/ubicasure
+JWT_SECRET=your-secret-here
+ADMIN_PASSWORD=your-admin-password
+PORT=3200
+```
+
+Update `front/src/environments/environment.ts` with your Google Maps and Firebase keys.
 
 **3. Run in development**
 
 ```bash
-npm run dev          # Starts both backend (3200) and frontend (4200) concurrently
-npm run dev:back     # Backend only
-npm run dev:front    # Frontend only
+pnpm run dev          # Starts both backend (3200) and frontend (4200) concurrently
+pnpm run dev:back     # Backend only
+pnpm run dev:front    # Frontend only
 ```
+
+## Docker (alternative local setup)
+
+Starts the backend and a MongoDB instance together — no local MongoDB installation needed.
+
+```bash
+cp back/.env.example back/.env
+# Set MONGO_URI=mongodb://mongodb:27017/ubicasure in back/.env
+docker-compose up
+```
+
+The Angular frontend still runs separately with `pnpm run dev:front`.
 
 ## API Endpoints
 
@@ -83,7 +106,7 @@ All station endpoints require an `Authorization: <token>` header.
 | Method | Path | Access | Description |
 |---|---|---|---|
 | POST | `/user/register` | Public | Register a new user |
-| POST | `/user/login` | Public | Login, returns JWT |
+| POST | `/user/login` | Public | Login, returns JWT (rate-limited) |
 
 ### Stations (`/station`)
 
@@ -118,17 +141,43 @@ All station endpoints require an `Authorization: <token>` header.
 | `CLIENT` | View stations and map |
 | `ADMIN` | View + create, update, delete stations |
 
+## Development Scripts
+
+Available from the repo root via `pnpm run <script>`:
+
+| Script | Description |
+|---|---|
+| `dev` | Start both servers concurrently |
+| `dev:back` | Start backend only |
+| `dev:front` | Start frontend only |
+| `build` | Angular production build |
+| `build:all` | Build Angular, then start Express to serve it |
+| `start` | Start backend only (production) |
+| `test` | Run tests across all workspace packages |
+| `lint` | Run Angular lint |
+| `type-check` | TypeScript type check |
+| `auto-commit` | Automated commit helper (scripts/auto-commit.js) |
+| `auto-pr` | Automated PR creation (scripts/auto-pr.js) |
+| `auto-jira` | Automated Jira Epic/Story creation (scripts/auto-jira.js) |
+| `dashboard` | Dev progress dashboard (scripts/dashboard.js) |
+
 ## Deployment
 
-### Backend (current: Heroku — needs migration)
+### Backend (pending Railway migration)
 
-See `update-plan.md` for the recommended migration to Railway or Render.
+The Heroku free tier was discontinued in November 2022. Migration to Railway is planned — see `update-plan.md`.
+
+For a unified deploy (Express serves the Angular build):
 
 ```bash
-npm start   # Runs node index.js from back/
+pnpm run build:all
 ```
 
+Set the required environment variables (`MONGO_URI`, `JWT_SECRET`, `ADMIN_PASSWORD`, `PORT`) in your hosting provider's dashboard.
+
 ### Frontend (Firebase Hosting)
+
+Firebase project: `propuestaestaciones`
 
 ```bash
 cd front
@@ -136,13 +185,10 @@ ng build                     # Outputs to dist/map
 firebase deploy              # Deploy to Firebase Hosting
 ```
 
-## Known Issues / Limitations
+## Geographic Constraint
 
-- MongoDB URI, JWT secret, and API keys are currently hardcoded — see `update-plan.md`
-- Backend is deployed on Heroku's free tier which was discontinued in November 2022
-- Station coordinates are restricted to the San Salvador metropolitan area
-- `bcrypt-nodejs` is unmaintained; replacement is tracked in `update-plan.md`
+Stations are restricted to the San Salvador metropolitan area (lat 14.53-14.68, lng -90.64 to -90.47). This is enforced server-side in the station controller.
 
 ## Contributing
 
-See `update-plan.md` for the prioritized list of improvements before adding new features.
+See `update-plan.md` for the prioritized improvement backlog before adding new features.

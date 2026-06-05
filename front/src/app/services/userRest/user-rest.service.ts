@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
+import { AuthStorageService } from '../auth-storage/auth-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,43 +10,30 @@ import firebase from 'firebase/compat/app';
 export class UserRestService {
   httpOptions = new HttpHeaders().set('Content-Type', 'application/json');
 
-  getToken(){
-    let globalToken = localStorage.getItem('token');
-    let token;
-    if(globalToken != undefined){
-      token = globalToken;
-    }else{
-      token = '';
-    }
-    return token;
+  getToken(): string {
+    return this.authStorage.getToken();
   }
 
-  getIdentity(){
-    let globalIdentity = localStorage.getItem('identity');
-    let identity;
-    if(globalIdentity != undefined){
-      identity = JSON.parse(globalIdentity);
-    }else{
-      identity = '';
-    }
-    return identity;
+  getIdentity(): any {
+    return this.authStorage.getIdentity();
   }
 
   constructor(
     private http: HttpClient,
-    private fireAuth: AngularFireAuth
-    ) { }
+    private fireAuth: AngularFireAuth,
+    private authStorage: AuthStorageService
+  ) { }
 
-  register(params:{}){
+  register(params: {}){
     return this.http.post(environment.baseUri + 'user/register', params, {headers: this.httpOptions});
   }
 
-  login(params:{}){
-    return this.http.post(environment.baseUri +  'user/login', params, {headers: this.httpOptions});
+  login(params: {}){
+    return this.http.post(environment.baseUri + 'user/login', params, {headers: this.httpOptions});
   }
 
   logOut(){
+    this.authStorage.clearAll();
     this.fireAuth.signOut();
   }
-
 }

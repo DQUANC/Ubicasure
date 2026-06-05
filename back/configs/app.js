@@ -1,22 +1,41 @@
 'use strict'
 
+const path = require('path');
 const userRoutes = require('../src/routes/user.routes');
 const stationRoutes = require('../src/routes/station.routes');
 
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
 const app = express();
 const port = process.env.PORT || 3200;
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20 });
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:4200',
+    'https://propuestaestaciones.web.app',
+    'https://propuestaestaciones.firebaseapp.com'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.use('/user/login', loginLimiter);
 app.use('/user', userRoutes);
 app.use('/station', stationRoutes);
 
-exports.initServer = ()=> app.listen(port, ()=>{
+// Serve Angular SPA — only active when front/dist/map exists (i.e. after a production build)
+const distPath = path.join(__dirname, '../../front/dist/map');
+app.use(express.static(distPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
+exports.initServer = () => app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });

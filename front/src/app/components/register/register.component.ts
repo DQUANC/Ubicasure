@@ -5,9 +5,10 @@ import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
+    standalone: false
 })
 export class RegisterComponent implements OnInit {
   user: UserModel;

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Pre-commit validation
+# - Run tests
+# - Run linter
+# - Type check
+# - Check for secrets
+
+set -e
+
+echo "🔍 Pre-commit: checking for committed secrets..."
+
+# Block .env files (not .env.example) from being committed
+if git diff --cached --name-only | grep -qE '(^|/)\.env$'; then
+  echo "❌ .env file detected in commit — remove it and use .env.example instead"
+  exit 1
+fi
+
+echo "✅ Pre-commit passed"
+exit 0

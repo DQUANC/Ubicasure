@@ -10,7 +10,7 @@ exports.createAdmin = async(req,res)=>{
             name: 'Daniel Pérez',
             username: 'SuperAdmin',
             email: 'daniel@gmail.com',
-            password: await encrypt('123456'),
+            password: await encrypt(process.env.ADMIN_PASSWORD || '123456'),
             role: 'ADMIN'
         }
 

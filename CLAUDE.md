@@ -2,7 +2,7 @@
 
 ## What This Project Is
 
-Ubicasure is a full-stack monorepo — an Angular 14 SPA (`front/`) backed by an Express + MongoDB REST API (`back/`). It lets users find and manage emergency service stations (police and fire) in El Salvador on an interactive Google Map.
+Ubicasure is a full-stack monorepo — an Angular 14 SPA (`front/`) backed by an Express + MongoDB REST API (`back/`). It lets users find and manage emergency service stations (police and fire) in Guatemala on an interactive Google Map.
 
 ## Running Locally
 
