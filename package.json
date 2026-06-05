@@ -1,6 +1,6 @@
 {
   "name": "ubicasure",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Emergency service station finder for El Salvador",
   "private": true,
   "packageManager": "pnpm@9.0.0",

@@ -1,3 +1,12 @@
+## [0.2.2] - 2026-06-05
+
+- fix: resolve production deployment issues across backend and frontend
+- chore(backend): update SuperAdmin name and email in seed data
+- fix(backend): upsert admin on startup instead of skipping if exists
+- fix(map): remove invalid mapId causing blank map tiles
+- fix(map): move map init to ngAfterViewInit so DOM is ready
+- fix(map): render map when geolocation is blocked or denied
+
 ## [0.2.1] - 2026-06-05
 
 - Merge pull request #3 from DQUANC/feat/modernization-update-plan
