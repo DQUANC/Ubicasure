@@ -38,8 +38,7 @@ export class MapaGeneralComponent implements OnInit, AfterViewInit {
     const initWithPos = (pos: { lat: number; lng: number }) => {
       const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
         zoom: 14,
-        center: pos,
-        mapId: 'c7ce922149e4c42d'
+        center: pos
       });
 
       this.initMap(map);
