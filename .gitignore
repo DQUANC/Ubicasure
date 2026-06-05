@@ -35,7 +35,6 @@ Thumbs.db
 # Firebase
 .firebase/
 **/.firebase/
-front/.firebaserc
 
 # Coverage
 coverage/

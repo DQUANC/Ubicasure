@@ -19,8 +19,8 @@ app.use(helmet());
 app.use(cors({
   origin: [
     'http://localhost:4200',
-    'https://propuestaestaciones.web.app',
-    'https://propuestaestaciones.firebaseapp.com'
+    'https://ubicasure-43ef4.web.app',
+    'https://ubicasure-43ef4.firebaseapp.com'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
