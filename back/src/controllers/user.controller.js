@@ -6,18 +6,20 @@ const { validateData, encrypt, checkPassword } = require('../utils/validate');
 
 exports.createAdmin = async () => {
     try {
+        const password = await encrypt(process.env.ADMIN_PASSWORD || '123456');
         const data = {
-            name: 'Daniel Pérez',
+            name: 'Daniel Quan',
             username: 'SuperAdmin',
-            email: 'daniel@gmail.com',
-            password: await encrypt(process.env.ADMIN_PASSWORD || '123456'),
+            email: 'danielquan.c@gmail.com',
+            password,
             role: 'ADMIN'
         };
-        const adminExist = await User.findOne({ username: data.username });
-        if (!adminExist) {
-            await new User(data).save();
-            console.log('Admin user created');
-        }
+        const result = await User.findOneAndUpdate(
+            { username: data.username },
+            { $set: data },
+            { upsert: true, new: true }
+        );
+        console.log(`Admin user ${result.isNew ? 'created' : 'updated'}`);
     } catch (err) {
         console.error('Error creating admin:', err);
     }

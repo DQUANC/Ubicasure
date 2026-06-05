@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { StationModel } from 'src/app/models/station.model';
 import { StationRestService } from 'src/app/services/stationRest/station-rest.service';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
     styleUrls: ['./mapa-general.component.css'],
     standalone: false
 })
-export class MapaGeneralComponent implements OnInit {
+export class MapaGeneralComponent implements OnInit, AfterViewInit {
   map: any;
   marker = new google.maps.Marker;
   stationModel: StationModel;
@@ -32,44 +32,44 @@ export class MapaGeneralComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.userRest.getIdentity().role;
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var map = new google.maps.Map(document.getElementById('map') as HTMLElement,
-          {
-            zoom: 14,
-            center: pos,
-            mapId: 'c7ce922149e4c42d'
-          });
+  }
 
-        this.initMap(map);
-        this.set(map);
-        this.getStations(map);
-
-        const locationButton = document.createElement("button");
-        locationButton.id = 'center'
-        locationButton.textContent = "Centrar Mapa";
-        locationButton.title = 'Centra el mapa'
-        locationButton.classList.add("custom-map-control-button");
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-
-        locationButton.addEventListener("click", () => {
-          map.setOptions({
-            center: pos,
-            zoom: 14
-          })
-        })
-        if (this.role == 'ADMIN') {
-          let agregar = document.getElementById('Abutton') as HTMLButtonElement;
-
-          agregar.classList.add("custom-map-control-button");
-          agregar.title = 'Agrega una estación'
-          map.controls[1].push(agregar);
-        }
+  ngAfterViewInit(): void {
+    const initWithPos = (pos: { lat: number; lng: number }) => {
+      const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
+        zoom: 14,
+        center: pos
       });
+
+      this.initMap(map);
+      this.set(map);
+      this.getStations(map);
+
+      const locationButton = document.createElement('button');
+      locationButton.id = 'center';
+      locationButton.textContent = 'Centrar Mapa';
+      locationButton.title = 'Centra el mapa';
+      locationButton.classList.add('custom-map-control-button');
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+
+      locationButton.addEventListener('click', () => {
+        map.setOptions({ center: pos, zoom: 14 });
+      });
+
+      if (this.role == 'ADMIN') {
+        const agregar = document.getElementById('Abutton') as HTMLButtonElement;
+        agregar.classList.add('custom-map-control-button');
+        agregar.title = 'Agrega una estación';
+        map.controls[1].push(agregar);
+      }
+    };
+
+    const sanSalvador = { lat: 14.6349, lng: -90.5069 };
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => initWithPos({ lat: position.coords.latitude, lng: position.coords.longitude }),
+      () => initWithPos(sanSalvador)
+    );
   }
 
   set(map: any) {
