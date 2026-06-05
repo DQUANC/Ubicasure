@@ -1,3 +1,10 @@
+## [0.2.0] - 2026-06-05
+
+- feat: modernize full stack, harden CI, and ship to production
+- chore(deploy): migrate Firebase project to ubicasure-43ef4
+- chore(deploy): set production baseUri to Render backend URL
+- feat(deploy): wire deployment to Render + Firebase Hosting
+
 # Changelog
 
 ## [0.1.0] - 2026-06-05
