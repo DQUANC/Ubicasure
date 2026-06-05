@@ -1,3 +1,8 @@
+## [0.3.0] - 2026-06-05
+
+- feat(front): migrate Angular frontend to Next.js 16 + React 19
+- feat(front): migrate Angular frontend to Next.js 16 + React 19
+
 ## [0.2.3] - 2026-06-05
 
 - fix: replace invalid Maps API key and harden admin password seeding
