@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { StationModel } from 'src/app/models/station.model';
 import { StationRestService } from 'src/app/services/stationRest/station-rest.service';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
     styleUrls: ['./mapa-general.component.css'],
     standalone: false
 })
-export class MapaGeneralComponent implements OnInit {
+export class MapaGeneralComponent implements OnInit, AfterViewInit {
   map: any;
   marker = new google.maps.Marker;
   stationModel: StationModel;
@@ -32,6 +32,9 @@ export class MapaGeneralComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.userRest.getIdentity().role;
+  }
+
+  ngAfterViewInit(): void {
     const initWithPos = (pos: { lat: number; lng: number }) => {
       const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
         zoom: 14,
