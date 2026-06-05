@@ -1,3 +1,8 @@
+## [0.2.1] - 2026-06-05
+
+- Merge pull request #3 from DQUANC/feat/modernization-update-plan
+- fix(backend): fix createAdmin crash and DB race condition on startup
+
 ## [0.2.0] - 2026-06-05
 
 - feat: modernize full stack, harden CI, and ship to production
