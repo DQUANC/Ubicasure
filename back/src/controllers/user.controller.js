@@ -8,9 +8,9 @@ exports.createAdmin = async () => {
     try {
         const password = await encrypt(process.env.ADMIN_PASSWORD || '123456');
         const data = {
-            name: 'Daniel Pérez',
+            name: 'Daniel Quan',
             username: 'SuperAdmin',
-            email: 'daniel@gmail.com',
+            email: 'danielquan.c@gmail.com',
             password,
             role: 'ADMIN'
         };
