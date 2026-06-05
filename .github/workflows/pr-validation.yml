@@ -37,10 +37,11 @@ jobs:
         continue-on-error: true
 
       # ----------------------------------------------------------------
-      # Lint
+      # Lint (continue-on-error until ESLint is configured)
       # ----------------------------------------------------------------
       - name: Run linter
         run: pnpm run lint
+        continue-on-error: true
 
       # ----------------------------------------------------------------
       # Type check

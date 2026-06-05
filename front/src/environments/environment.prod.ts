@@ -1,12 +1,13 @@
 export const environment = {
   firebaseConfig: {
-    apiKey: "AIzaSyBEK08rnJMdpz8pK9n6cHsj6H4PUioByVQ",
-    authDomain: "propuestaestaciones.firebaseapp.com",
-    projectId: "propuestaestaciones",
-    storageBucket: "propuestaestaciones.appspot.com",
-    messagingSenderId: "272032434803",
-    appId: "1:272032434803:web:fd472a280c4c4f68fdf806"
+    apiKey: "AIzaSyBHsmvN_U3rk-vvBClqPkl6Uve1GaxLCTU",
+    authDomain: "ubicasure-43ef4.firebaseapp.com",
+    projectId: "ubicasure-43ef4",
+    storageBucket: "ubicasure-43ef4.firebasestorage.app",
+    messagingSenderId: "362781442875",
+    appId: "1:362781442875:web:969efdcb415c317ed7ad1e",
+    measurementId: "G-CBVEE2BW60"
   },
   production: true,
-  baseUri: 'https://propuesta-final.herokuapp.com/'
+  baseUri: 'https://ubicasure.onrender.com/'
 };
