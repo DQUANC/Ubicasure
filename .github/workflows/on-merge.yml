@@ -271,7 +271,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Angular (production)
+      - name: Build Next.js (production)
+        env:
+          NEXT_PUBLIC_API_URL: https://ubicasure.onrender.com
+          NEXT_PUBLIC_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_MAPS_API_KEY }}
         run: pnpm --filter map run build
 
       - name: Deploy to Firebase Hosting
