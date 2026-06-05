@@ -6,7 +6,8 @@ const { validateData, encrypt, checkPassword } = require('../utils/validate');
 
 exports.createAdmin = async () => {
     try {
-        const password = await encrypt(process.env.ADMIN_PASSWORD || '123456');
+        if (!process.env.ADMIN_PASSWORD) throw new Error('ADMIN_PASSWORD env var is not set');
+        const password = await encrypt(process.env.ADMIN_PASSWORD);
         const data = {
             name: 'Daniel Quan',
             username: 'SuperAdmin',
