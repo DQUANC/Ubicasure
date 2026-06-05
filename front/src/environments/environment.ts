@@ -12,7 +12,7 @@ export const environment = {
     appId: "1:272032434803:web:fd472a280c4c4f68fdf806"
   },
   production: false,
-  baseUri: 'https://propuesta-final.herokuapp.com/'
+  baseUri: 'http://localhost:3200/'
 };
 
 /*

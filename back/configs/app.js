@@ -29,12 +29,15 @@ app.use('/user/login', loginLimiter);
 app.use('/user', userRoutes);
 app.use('/station', stationRoutes);
 
-// Serve Angular SPA — only active when front/dist/map exists (i.e. after a production build)
+// Serve Angular SPA only when the build output exists locally (not on Render where only back/ is deployed)
+const fs = require('fs');
 const distPath = path.join(__dirname, '../../front/dist/map');
-app.use(express.static(distPath));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
-});
+if (fs.existsSync(path.join(distPath, 'index.html'))) {
+  app.use(express.static(distPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
 
 exports.initServer = () => app.listen(port, () => {
     console.log(`Listening on port ${port}`);

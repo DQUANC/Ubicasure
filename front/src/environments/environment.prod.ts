@@ -8,5 +8,5 @@ export const environment = {
     appId: "1:272032434803:web:fd472a280c4c4f68fdf806"
   },
   production: true,
-  baseUri: 'https://propuesta-final.herokuapp.com/'
+  baseUri: 'https://REPLACE_WITH_RENDER_URL/'
 };
