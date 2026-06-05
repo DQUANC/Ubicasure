@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   token:any;

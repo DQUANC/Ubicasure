@@ -3,17 +3,28 @@
   "version": "1.0.0",
   "description": "Emergency service station finder for El Salvador",
   "private": true,
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "install:all": "npm install && cd back && npm install && cd ../front && npm install",
-    "dev": "concurrently \"npm run dev:back\" \"npm run dev:front\"",
-    "dev:back": "cd back && nodemon index.js",
-    "dev:front": "cd front && ng serve",
-    "build": "cd front && ng build",
-    "build:back": "echo \"Backend has no build step (plain Node.js)\"",
-    "start": "cd back && node index.js",
-    "start:front": "cd front && ng serve"
+    "install:all":  "pnpm install",
+    "dev":          "concurrently \"pnpm run dev:back\" \"pnpm run dev:front\"",
+    "dev:back":     "cd back && nodemon index.js",
+    "dev:front":    "cd front && ng serve",
+    "build":        "cd front && ng build",
+    "build:back":   "echo \"Backend has no build step (plain Node.js)\"",
+    "build:all":    "pnpm --filter map run build && pnpm run start",
+    "start":        "cd back && node index.js",
+    "start:front":  "cd front && ng serve",
+    "prepare":      "husky",
+    "test":         "pnpm -r test",
+    "lint":         "pnpm --filter map run lint",
+    "type-check":   "tsc --noEmit",
+    "auto-commit":  "node scripts/auto-commit.js",
+    "auto-pr":      "node scripts/auto-pr.js",
+    "auto-jira":    "node scripts/auto-jira.js",
+    "dashboard":    "node scripts/dashboard.js"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "husky": "^9.1.7"
   }
 }

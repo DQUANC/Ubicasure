@@ -1,6 +1,6 @@
 'use strict'
 
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 
 exports.validateData = (data)=>{
     let keys = Object.keys(data), msg= '';
@@ -13,7 +13,7 @@ exports.validateData = (data)=>{
 
 exports.encrypt =(password)=>{
     try{
-        return bcrypt.hashSync(password);
+        return bcrypt.hashSync(password, 10);
     }catch(err){
         console.log(err);
         return err;

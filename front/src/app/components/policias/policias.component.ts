@@ -5,9 +5,10 @@ import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-policias',
-  templateUrl: './policias.component.html',
-  styleUrls: ['./policias.component.css']
+    selector: 'app-policias',
+    templateUrl: './policias.component.html',
+    styleUrls: ['./policias.component.css'],
+    standalone: false
 })
 export class PoliciasComponent implements OnInit {
   map: any;

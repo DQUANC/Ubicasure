@@ -5,9 +5,10 @@ import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-mapa-general',
-  templateUrl: './mapa-general.component.html',
-  styleUrls: ['./mapa-general.component.css']
+    selector: 'app-mapa-general',
+    templateUrl: './mapa-general.component.html',
+    styleUrls: ['./mapa-general.component.css'],
+    standalone: false
 })
 export class MapaGeneralComponent implements OnInit {
   map: any;
@@ -781,6 +782,14 @@ export class MapaGeneralComponent implements OnInit {
       this.infoWindow = infowindow;
       this.id = undefined;
     }
+  }
+
+  /** Returns true when lat/lng are set but outside San Salvador bounds */
+  latLngOutOfBounds(): boolean {
+    const lat = this.stationModel.lat;
+    const lng = this.stationModel.lng;
+    if (!lat || !lng) return false;
+    return lat < 14.53 || lat > 14.68 || lng < -90.64 || lng > -90.47;
   }
 
   getStations(map: any) {

@@ -5,9 +5,10 @@ import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-bomberos-voluntarios',
-  templateUrl: './bomberos-voluntarios.component.html',
-  styleUrls: ['./bomberos-voluntarios.component.css']
+    selector: 'app-bomberos-voluntarios',
+    templateUrl: './bomberos-voluntarios.component.html',
+    styleUrls: ['./bomberos-voluntarios.component.css'],
+    standalone: false
 })
 export class BomberosVoluntariosComponent implements OnInit {
   map:any;

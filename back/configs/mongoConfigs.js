@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 exports.init = ()=>{
 
-    const uriMongo = 'mongodb+srv://daniel:DGatN7su@propuesta4.urx1g.mongodb.net/?retryWrites=true&w=majority';
+    const uriMongo = process.env.MONGO_URI;
     mongoose.Promise = global.Promise;
 
     mongoose.connection.on('error', ()=>{
@@ -28,7 +28,6 @@ exports.init = ()=>{
     });
     mongoose.connect(uriMongo, {
         maxPoolSize: 15,
-        connectTimeoutMS: 2500,
-        useNewUrlParser: true
-    }).catch(err=>console.log(err));
+        connectTimeoutMS: 2500
+    }).catch(err => console.log(err));
 };

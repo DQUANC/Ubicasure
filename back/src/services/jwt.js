@@ -1,11 +1,10 @@
 'use strict'
 
-const jwt = require('jwt-simple');
-const moment = require('moment');
-const secretKey = 'Proyecto_Final'
+const jwt = require('jsonwebtoken');
 
-exports.createToken = async(user)=>{
-    try{
+exports.createToken = async (user) => {
+    try {
+        const secretKey = process.env.JWT_SECRET;
         let payload = {
             sub: user._id,
             username: user.username,
@@ -14,13 +13,11 @@ exports.createToken = async(user)=>{
             surname: user.surname,
             phone: user.phone,
             email: user.email,
-            role: user.role,
-            iat: moment().unix(),
-            exp: moment().add(24, 'hour').unix()
-        }
-        return jwt.encode(payload, secretKey);
-    }catch(err){
+            role: user.role
+        };
+        return jwt.sign(payload, secretKey, { expiresIn: '24h' });
+    } catch (err) {
         console.log(err);
         return err;
     }
-}
+};
