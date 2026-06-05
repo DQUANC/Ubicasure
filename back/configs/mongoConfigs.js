@@ -26,8 +26,8 @@ exports.init = ()=>{
     mongoose.connection.on('disconnected', ()=>{
         console.log('MongoDb | disonnected');
     });
-    mongoose.connect(uriMongo, {
+    return mongoose.connect(uriMongo, {
         maxPoolSize: 15,
         connectTimeoutMS: 2500
-    }).catch(err => console.log(err));
+    });
 };

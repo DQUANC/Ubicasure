@@ -4,24 +4,22 @@ const jwt = require('../services/jwt');
 const User = require('../models/user.model');
 const { validateData, encrypt, checkPassword } = require('../utils/validate');
 
-exports.createAdmin = async(req,res)=>{
-    try{
-        let data ={
+exports.createAdmin = async () => {
+    try {
+        const data = {
             name: 'Daniel Pérez',
             username: 'SuperAdmin',
             email: 'daniel@gmail.com',
             password: await encrypt(process.env.ADMIN_PASSWORD || '123456'),
             role: 'ADMIN'
+        };
+        const adminExist = await User.findOne({ username: data.username });
+        if (!adminExist) {
+            await new User(data).save();
+            console.log('Admin user created');
         }
-
-        let adminExist = await User.findOne({username: data.username});
-        if(adminExist){}else{
-            let user = new User(data);
-            await user.save();
-        }
-    }catch(err){
-        console.log(err);
-        return res.status(500).send({err, message: 'Error creating admin'}) ;
+    } catch (err) {
+        console.error('Error creating admin:', err);
     }
 };
 //FUNCIONES PÚBLICAS
