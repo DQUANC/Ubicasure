@@ -1,3 +1,9 @@
+## [0.2.3] - 2026-06-05
+
+- fix: replace invalid Maps API key and harden admin password seeding
+- fix(map): replace invalid Maps API key with key from ubicasure-43ef4 project
+- fix(backend): require ADMIN_PASSWORD env var, remove weak fallback
+
 ## [0.2.2] - 2026-06-05
 
 - fix: resolve production deployment issues across backend and frontend
