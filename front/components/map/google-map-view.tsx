@@ -9,7 +9,7 @@ import {
   useMapsLibrary,
   type MapMouseEvent,
 } from "@vis.gl/react-google-maps";
-import { SAN_SALVADOR_CENTER, MARKER_ICONS } from "@/lib/constants";
+import { GUATEMALA_CITY_CENTER, MARKER_ICONS } from "@/lib/constants";
 import type { Station } from "@/lib/types";
 
 const MAPS_KEY = process.env.NEXT_PUBLIC_MAPS_API_KEY ?? "";
@@ -65,7 +65,7 @@ function PlacesLayer() {
     const service = new places.PlacesService(currentMap);
     const gridPoints = [
       { lat: 14.6465, lng: -90.5352 },
-      { lat: 14.652, lng: -90.5935 },
+      { lat: 14.6520, lng: -90.5935 },
       { lat: 14.5476, lng: -90.5624 },
       { lat: 14.5638, lng: -90.4879 },
     ];
@@ -152,12 +152,12 @@ function InnerMap({
   onAddClick,
 }: Omit<GoogleMapViewProps, "stations"> & { stations: Station[] }) {
   const map = useMap();
-  const [center, setCenter] = useState(SAN_SALVADOR_CENTER);
+  const [center, setCenter] = useState(GUATEMALA_CITY_CENTER);
 
   useEffect(() => {
     navigator.geolocation?.getCurrentPosition(
       (pos) => setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => setCenter(SAN_SALVADOR_CENTER)
+      () => setCenter(GUATEMALA_CITY_CENTER)
     );
   }, []);
 

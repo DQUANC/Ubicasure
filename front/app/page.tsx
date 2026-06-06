@@ -13,10 +13,10 @@ export default function LandingPage() {
             UBICASURE
           </h1>
           <p className="text-sm text-gray-500 mb-1 uppercase tracking-wider">
-            Guatemala, San Salvador
+            Guatemala, Guatemala
           </p>
           <p className="text-gray-600 mt-4 mb-8 leading-relaxed">
-            Encuentra estaciones de policía y bomberos en San Salvador al
+            Encuentra estaciones de policía y bomberos en Guatemala al
             instante. Información actualizada, marcadores interactivos y acceso
             rápido a servicios de emergencia.
           </p>

@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ubicasure — Estaciones de emergencia en Guatemala",
   description:
-    "Encuentra estaciones de policía y bomberos en San Salvador, Guatemala.",
+    "Encuentra estaciones de policía y bomberos en Guatemala.",
 };
 
 export default function RootLayout({
