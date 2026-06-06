@@ -71,7 +71,7 @@ export function CreateStationDialog({
     if (!form.type) { toast.error("Selecciona un tipo de estación"); return; }
     if (!pendingPin) { toast.error("Selecciona la ubicación en el mapa"); return; }
     if (latLngOutOfBounds(pendingPin.lat, pendingPin.lng)) {
-      toast.error("La ubicación debe estar dentro de San Salvador");
+      toast.error("La ubicación debe estar dentro de Guatemala");
       return;
     }
     const rating = parseFloat(form.rating);
@@ -209,7 +209,7 @@ export function CreateStationDialog({
             </div>
             {pendingPin && latLngOutOfBounds(pendingPin.lat, pendingPin.lng) && (
               <p className="text-xs text-destructive">
-                Ubicación fuera de San Salvador
+                Ubicación fuera de Guatemala
               </p>
             )}
           </div>
