@@ -1,3 +1,9 @@
+## [0.3.1] - 2026-06-06
+
+- fix: replace all El Salvador references with Guatemala
+- fix: replace all El Salvador references with Guatemala
+- fix(front): navy sidebar background and correct San Salvador coordinates
+
 ## [0.3.0] - 2026-06-05
 
 - feat(front): migrate Angular frontend to Next.js 16 + React 19

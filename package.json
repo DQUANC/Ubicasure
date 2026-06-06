@@ -1,6 +1,6 @@
 {
   "name": "ubicasure",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Emergency service station finder for Guatemala",
   "private": true,
   "packageManager": "pnpm@9.0.0",
