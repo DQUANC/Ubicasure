@@ -52,10 +52,7 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar
-      className="border-r-0"
-      style={{ background: "#1a237e", width: "var(--sidebar-width)" }}
-    >
+    <Sidebar className="border-r-0">
       <SidebarHeader className="px-4 py-4 border-b border-white/20">
         <Link href="/map" className="flex flex-col">
           <span className="text-lg font-bold text-white tracking-wide">

@@ -64,10 +64,10 @@ function PlacesLayer() {
 
     const service = new places.PlacesService(currentMap);
     const gridPoints = [
-      { lat: 14.6465, lng: -90.5352 },
-      { lat: 14.652, lng: -90.5935 },
-      { lat: 14.5476, lng: -90.5624 },
-      { lat: 14.5638, lng: -90.4879 },
+      { lat: 13.7034, lng: -89.2239 },
+      { lat: 13.7034, lng: -89.2600 },
+      { lat: 13.6700, lng: -89.2239 },
+      { lat: 13.6700, lng: -89.2600 },
     ];
     const searchTerms = [
       { name: "Bombero Voluntario", icon: MARKER_ICONS["Bombero Voluntario"], exclude: ["municipales"] },

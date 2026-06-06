@@ -39,7 +39,7 @@ front/src/app/
 
 ## Important Constraints
 
-- **Geographic fence**: Stations are limited to San Salvador (lat 14.53–14.68, lng -90.64 to -90.47). The backend enforces this in the station controller.
+- **Geographic fence**: Stations are limited to San Salvador, El Salvador (lat 13.55–13.85, lng -89.35 to -89.05). The backend enforces this in the station controller.
 - **Roles**: `ADMIN` can create/update/delete stations; `CLIENT` can only view. Role is stored in the JWT payload.
 - **Token handling**: JWT is stored in `localStorage` under the key `token`; user identity under `identity`. Services read these directly.
 - **Station immutability**: Once created, `user`, `address`, `lat`, `lng` cannot be updated — the controller explicitly blocks this in `updateStation`.

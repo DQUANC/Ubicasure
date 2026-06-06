@@ -1,10 +1,10 @@
 import type { StationType } from "./types";
 
-export const SAN_SALVADOR_CENTER = { lat: 14.6349, lng: -90.5069 };
+export const SAN_SALVADOR_CENTER = { lat: 13.6929, lng: -89.2182 };
 
 export const SAN_SALVADOR_BOUNDS = {
-  lat: { min: 14.53, max: 14.68 },
-  lng: { min: -90.64, max: -90.47 },
+  lat: { min: 13.55, max: 13.85 },
+  lng: { min: -89.35, max: -89.05 },
 };
 
 export const STATION_TYPES: StationType[] = [

@@ -24,8 +24,8 @@ exports.createStation = async (req, res) => {
         if (locationExist) return res.status(400).send({ message: `Estación en coordenadas ${params.lat, params.lng} ya existe` });
         let addressExist = await Station.findOne({ address: params.address });
         if (addressExist) return res.status(400).send({ message: `Estación en dirección ${params.address} ya existe` });
-        if ((params.lat > 14.678119039011102 || params.lng > -90.46753632421282) ||
-            (params.lat < 14.525956147007097 || params.lng < -90.63782441015032))
+        if ((params.lat > 13.85 || params.lng > -89.05) ||
+            (params.lat < 13.55 || params.lng < -89.35))
             return res.status(400).send({ message: 'Las coordenadas exceden el límite de espacio' });
         if (params.rating > 5) return res.status(400).send({ message: 'La clasificación no puede ser mayor a 5' });
         data.user = req.user.sub;
