@@ -44,62 +44,50 @@ export async function register(payload: RegisterPayload): Promise<{ message: str
   return handleResponse<{ message: string }>(res);
 }
 
-export async function getStations(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getStations`, {
-    headers: authHeaders(token),
-  });
+// Public read endpoints — no authentication required
+export async function getStations(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getStations`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
-export async function getPoliceNational(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getNationalStationsP`, {
-    headers: authHeaders(token),
-  });
+export async function getPoliceNational(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getNationalStationsP`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
-export async function getPoliceMunicipal(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getMunicipalStationsP`, {
-    headers: authHeaders(token),
-  });
+export async function getPoliceMunicipal(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getMunicipalStationsP`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
-export async function getPoliceAll(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getPoliceStations`, {
-    headers: authHeaders(token),
-  });
+export async function getPoliceAll(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getPoliceStations`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
-export async function getFireMunicipal(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getMunicipalStationsF`, {
-    headers: authHeaders(token),
-  });
+export async function getFireMunicipal(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getMunicipalStationsF`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
-export async function getFireVolunteer(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getVolunteerStationsF`, {
-    headers: authHeaders(token),
-  });
+export async function getFireVolunteer(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getVolunteerStationsF`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
-export async function getFireAll(token: string): Promise<Station[]> {
-  const res = await fetch(`${BASE}/station/getFireStations`, {
-    headers: authHeaders(token),
-  });
+export async function getFireAll(): Promise<Station[]> {
+  const res = await fetch(`${BASE}/station/getFireStations`);
   const data = await handleResponse<{ stations: Station[] }>(res);
   return data.stations;
 }
 
+// Admin write endpoints — still require a JWT token
 export async function createStation(
   token: string,
   payload: CreateStationPayload
