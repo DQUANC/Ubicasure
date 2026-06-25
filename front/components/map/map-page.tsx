@@ -25,7 +25,7 @@ export type StationView =
   | "fire-volunteer"
   | "fire-all";
 
-const FETCHERS: Record<StationView, (token: string) => Promise<Station[]>> = {
+const FETCHERS: Record<StationView, () => Promise<Station[]>> = {
   all: getStations,
   "police-national": getPoliceNational,
   "police-municipal": getPoliceMunicipal,
@@ -36,7 +36,7 @@ const FETCHERS: Record<StationView, (token: string) => Promise<Station[]>> = {
 };
 
 export function MapPage({ view }: { view: StationView }) {
-  const { token, isAuthenticated, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<Station | null>(null);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -45,18 +45,17 @@ export function MapPage({ view }: { view: StationView }) {
   const [pendingPin, setPendingPin] = useState<{ lat: number; lng: number } | null>(null);
 
   const loadStations = useCallback(async () => {
-    if (!token) return;
     try {
-      const data = await FETCHERS[view](token);
+      const data = await FETCHERS[view]();
       setStations(data);
     } catch {
       // silent fail — station list is best-effort
     }
-  }, [token, view]);
+  }, [view]);
 
   useEffect(() => {
-    if (isAuthenticated) loadStations();
-  }, [isAuthenticated, loadStations]);
+    loadStations();
+  }, [loadStations]);
 
   function handleMarkerClick(station: Station) {
     setSelectedStation(station);

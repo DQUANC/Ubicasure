@@ -1,15 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Map, Shield, Flame, LogOut, ChevronDown } from "lucide-react";
-import { toast } from "sonner";
+import { usePathname } from "next/navigation";
+import { Map, Shield, Flame, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/context/auth-context";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -42,14 +39,6 @@ const fireLinks = [
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { logout, user } = useAuth();
-
-  function handleLogout() {
-    logout();
-    toast.success("Sesión cerrada");
-    router.replace("/");
-  }
 
   return (
     <Sidebar className="border-r-0">
@@ -58,11 +47,9 @@ export function AppSidebar() {
           <span className="text-lg font-bold text-white tracking-wide">
             UBICASURE
           </span>
-          {user && (
-            <span className="text-xs text-white/60 mt-0.5 truncate">
-              {user.name}
-            </span>
-          )}
+          <span className="text-xs text-white/60 mt-0.5">
+            Guatemala, Guatemala
+          </span>
         </Link>
       </SidebarHeader>
 
@@ -156,16 +143,6 @@ export function AppSidebar() {
           </SidebarGroup>
         </Collapsible>
       </SidebarContent>
-
-      <SidebarFooter className="border-t border-white/20 p-3">
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
-        >
-          <LogOut className="w-4 h-4" />
-          <span>Cerrar sesión</span>
-        </button>
-      </SidebarFooter>
     </Sidebar>
   );
 }
